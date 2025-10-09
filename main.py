@@ -1,12 +1,7 @@
-from dotenv import load_dotenv
-from openai import OpenAI
+def meu_input():
+    ab = input("Digite")
+    return ab
 
-load_dotenv()
-client = OpenAI()
+v = meu_input()
 
-response = client.responses.create(
-    model="gpt-5",
-    input="Voce me escuta? se sim quantos dolares isto vai me custar?."
-)
-
-print(response.output_text)
+print(v)
