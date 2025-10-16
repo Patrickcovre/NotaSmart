@@ -1,7 +1,3 @@
-def meu_input():
-    ab = input("Digite")
-    return ab
+from integrations.step_openai import download_file_openai
 
-v = meu_input()
-
-print(v)
+download_file_openai()

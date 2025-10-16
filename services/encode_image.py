@@ -1,7 +1,7 @@
 import base64
 
 def get_image():
-    image_path = "/Users/patrickcovrerodrigues/Desktop/extrac_info/notasmart/temp/image.png"
+    image_path = "/Users/patrickcovrerodrigues/Desktop/extrac_info/notasmart/temp/nf-teste.png"
     return image_path
 
 
