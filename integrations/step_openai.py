@@ -31,7 +31,10 @@ def step_assist_openai():
     )
 
     csv_output_text = response.output_text
+    step_download_csv(csv_output_text)
+
+
+def step_download_csv(output_text: str):
     csv_path = os.path.join(os.path.dirname(__file__), "data.csv")
     with open(csv_path, "w", encoding="utf-8") as f:
-        f.write(csv_output_text)
-    print(f"CSV salvo em: {csv_path}")
+        f.write(output_text)
