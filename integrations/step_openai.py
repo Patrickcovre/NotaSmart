@@ -34,32 +34,36 @@ def step_send_nf_openai():
 
 def step_assist_openai():
     prompt = chat()
-    file = client.files.create(
-        file=open("mydata.csv", "rb"),
-        purpose='assistants'
-    )
-    assistant = client.beta.assistants.create(
-        instructions=prompt,
+    response = client.responses.create(
         model=config.openai_model,
-        tools=[
-            {"type": "code_interpreter"},
-        ],
-        tool_resources={
-           "code_interpreter": {
-            "file_ids": [file.id]
-        }
-        },
+        input=[
+            {
+                "role": "user",
+                "content": [
+                    {"type": "input_text", "text": prompt},
+                    {
+                        "type": "input_image",
+                        "image_url": encode_img(),
+                        "detail": "low"
+                    }
+                ]
+            }
+        ]
     )
-    print(assistant)
 
+    # Save the model's CSV/plain-text output to a file for download/opening
+    csv_output_text = response.output_text
+    csv_path = os.path.join(os.path.dirname(__file__), "data.csv")
+    with open(csv_path, "w", encoding="utf-8") as f:
+        f.write(csv_output_text)
+    print(f"CSV salvo em: {csv_path}")
 
 def download_file_openai():
-    csv_data = client.files.content("file-8mmuJoy7d1QpotK13uyAcT")
-    csv_datas = csv_data.decode('utf-8')
-
-    with open("mydata.csv", "w") as f:
-        f.write(csv_datas)
-
+    csv_data = client.files.content("file-WpzskShUtfzyqoJJrQyGWe")
+    
+    with open("mydata.csv", "wb") as f:  # Note: use "wb" para binary mode
+        f.write(csv_data.read())
+    
     print("File downloaded successfully")
 
 if __name__ == "__main__":

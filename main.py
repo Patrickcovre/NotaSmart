@@ -1,3 +1,3 @@
-from integrations.step_openai import download_file_openai
+from integrations.step_openai import step_assist_openai
 
-download_file_openai()
+step_assist_openai()
