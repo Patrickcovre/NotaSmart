@@ -3,6 +3,8 @@ from typing import List
 
 app = FastAPI()
 
+# TODO: ESTOU USANDO CONTENT_TYPE POR MOTIVO QUE É UM APP PESSOAL POR ENQUANTO ENTAO DE PRIMEIRO MOMENTO NAO VAI TER CAMADA DE SEGURANÇA AINDA, MAS DEPOIS VAI TER
+
 @app.post("/upload_file")
 async def upload_file(file:UploadFile):
     #Usar UploadFile para se caso a memória estiver quase estourando ele vai passar para o disco e continuar o processo
