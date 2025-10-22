@@ -3,6 +3,7 @@ import os
 import sys
 
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+from workflows.step_download_csv import step_download_csv
 from services.prompt_handler import chat
 from services.encode_image import encode_img
 from core.config import config
@@ -31,7 +32,4 @@ def step_assist_openai():
     )
 
     csv_output_text = response.output_text
-    csv_path = os.path.join(os.path.dirname(__file__), "data.csv")
-    with open(csv_path, "w", encoding="utf-8") as f:
-        f.write(csv_output_text)
-    print(f"CSV salvo em: {csv_path}")
+    step_download_csv(csv_output_text)
