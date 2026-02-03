@@ -7,13 +7,15 @@ from workflows.step_download_csv import step_download_csv
 from services.prompt_handler import chat
 from services.encode_image import encode_img
 from core.config import config
+from services.prompt_handler import chat
 
 api_key=config.openai_api_key
 
 client = OpenAI(api_key=api_key)
 
 def step_assist_openai():
-    prompt = chat()
+    prompt = chat("Me o nome da empresa que esta na nota fiscal")
+    print(prompt)
     response = client.responses.create(
         model=config.openai_model,
         input=[
